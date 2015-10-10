@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">Dog Love</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_crear_cuenta">Crea tu perfil</string>
+    <string name="title_activity_crear_perfil_mascota">Crea el perfil para tu mascota</string>
+    <string name="title_activity_perfil_dueno">Mi perfil</string>
+    <string name="title_activity_swipe">SwipeActivity</string>
+    <string name="title_activity_match_patita">MatchPatitaActivity</string>
+    <string-array name="raza_array">
+        <item>Bulldog</item>
+        <item>Poodle</item>
+    </string-array>
+
+</resources>

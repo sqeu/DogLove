@@ -1,0 +1,85 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    tools:context="com.love.dog.doglove.MatchPatitaActivity"
+    android:orientation="vertical"
+    android:background="@drawable/fondo_m"
+    >
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="It&apos;s a match"
+        android:id="@+id/textView9"
+        android:gravity="top|center_horizontal"
+        android:layout_alignParentTop="true"
+        android:layout_alignLeft="@+id/buttonIniciarChat"
+        android:layout_alignStart="@+id/buttonIniciarChat"
+        android:layout_marginTop="28dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:id="@+id/linearLayout"
+
+        android:layout_marginTop="51dp"
+        android:layout_below="@+id/textView9"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true">
+
+
+        <com.pkmmte.view.CircularImageView
+            android:layout_width="200px"
+            android:layout_height="200px"
+            android:src="@drawable/prueba"
+            android:id="@+id/circularImageMiPerro"
+            app:border="true"
+            app:border_color="#EEEEEE"
+            app:border_width="4dp"
+            app:shadow="true"
+            android:layout_marginRight="20dp"
+            />
+
+
+
+        <com.pkmmte.view.CircularImageView
+            android:layout_width="200px"
+            android:layout_height="200px"
+            android:src="@drawable/prueba"
+            android:id="@+id/circularImageOtroPerro"
+            app:border="true"
+            app:border_color="#EEEEEE"
+            app:border_width="4dp"
+            app:shadow="true"
+           android:layout_marginLeft="20dp"
+
+            />
+    </LinearLayout>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Iniciar chat"
+        android:id="@+id/buttonIniciarChat"
+        android:layout_marginTop="55dp"
+        android:layout_below="@+id/linearLayout"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Seguir Buscando"
+        android:id="@+id/buttonSeguirBuscando"
+        android:layout_below="@+id/buttonIniciarChat"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="46dp" />
+
+
+</RelativeLayout>
