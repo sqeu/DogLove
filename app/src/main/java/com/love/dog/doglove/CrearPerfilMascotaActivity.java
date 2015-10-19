@@ -98,6 +98,7 @@ public class CrearPerfilMascotaActivity extends AppCompatActivity implements Vie
     public void onRegistroCorrecto(List<MascotaDTO> perros) {
         Intent intent = new Intent();
         intent.setClass(this, SwipeActivity.class);
+        //System.out.println("CPMA: "+perros.get(1).getNombre());
         ListaPerrosDTO listaPerrosDTO=new ListaPerrosDTO(perros);
         intent.putExtra("perros",listaPerrosDTO);
         this.startActivity(intent);

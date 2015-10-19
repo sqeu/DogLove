@@ -6,7 +6,7 @@ android {
 
     defaultConfig {
         applicationId "com.love.dog.doglove"
-        minSdkVersion 14
+        minSdkVersion 15
         targetSdkVersion 23
         versionCode 1
         versionName "1.0"
@@ -28,5 +28,7 @@ dependencies {
     compile project (':AndTinder')
     compile 'com.parse.bolts:bolts-android:1.2.1'
     compile 'com.parse:parse-android:1.10.3'
+    compile 'com.facebook.android:facebook-android-sdk:4.6.0'
+    compile 'com.squareup.picasso:picasso:2.5.2'
 
 }

@@ -19,7 +19,7 @@ import com.love.dog.doglove.view.RegistroView;
  */
 public class RegistroMascotaPresenter implements IRegistroMascotaPresenter {
     //cambiar ip deacuerdo al lugar donde se corra
-    private static final String url = "http://192.168.241.1:8080/PetLove/RegistroServletMascota";
+    private static final String url = "http://192.168.1.40:8080/PetLove/RegistroServletMascota";
     private RegistroMascotaView view ;
 
     public RegistroMascotaPresenter(RegistroMascotaView view){
@@ -32,6 +32,7 @@ public class RegistroMascotaPresenter implements IRegistroMascotaPresenter {
         MascotaDTO mascota=new MascotaDTO();
         mascota.setNombre(nombre);
         mascota.setRaza(raza);
+        mascota.setEdad(edad);
         mascota.setIdcliente(Integer.parseInt(idCliente));
         final String json= new Gson().toJson(mascota);
 
@@ -43,6 +44,7 @@ public class RegistroMascotaPresenter implements IRegistroMascotaPresenter {
                     @Override
                     public void onResponse(String response) {
                         ResponseDTOconLlistaMascotas responseDTO = new Gson().fromJson(response, ResponseDTOconLlistaMascotas.class);
+                        //System.out.println(responseDTO.getPerros().get(1).getNombre());// PRUEBA
 
                         if (responseDTO.getMsgStatus().equals("OK")){
                             view.onRegistroCorrecto(responseDTO.getPerros());

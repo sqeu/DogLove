@@ -19,7 +19,7 @@ import com.love.dog.doglove.view.RegistroView;
 public class RegistroPresenter implements IRegistroPresenter{
 
     //cambiar ip deacuerdo al lugar donde se corra
-    private static final String url = "http://192.168.241.1:8080/PetLove/RegistroServlet";
+    private static final String url = "http://192.168.1.40:8080/PetLove/RegistroServlet";
     private RegistroView view;
 
     public RegistroPresenter(RegistroView view){

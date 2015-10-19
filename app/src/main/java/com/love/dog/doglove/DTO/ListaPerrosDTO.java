@@ -9,6 +9,11 @@ import java.util.List;
 public class ListaPerrosDTO implements Serializable {
     List<MascotaDTO> perros;
 
+    public ListaPerrosDTO(List<MascotaDTO> perros) {
+
+        this.perros = perros;
+    }
+
     public List<MascotaDTO> getPerros() {
         return perros;
     }
@@ -17,8 +22,5 @@ public class ListaPerrosDTO implements Serializable {
         this.perros = perros;
     }
 
-    public ListaPerrosDTO(List<MascotaDTO> perros) {
 
-        this.perros = perros;
-    }
 }

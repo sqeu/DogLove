@@ -12,5 +12,12 @@
         <item>Bulldog</item>
         <item>Poodle</item>
     </string-array>
+    <string name="facebook_app_id">959635390742149</string>
+    <string name="title_activity_chat">ChatActivity</string>
+
+    <string name="message_hint">Escribe un mensaje</string>
+    <string name="send">Enviar</string>
+    <string name="profile_me">My Profile Pic</string>
+    <string name="profile_other">Other profile pic</string>
 
 </resources>

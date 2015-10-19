@@ -29,23 +29,15 @@ public class SwipeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_swipe);
         mCardContainer = (CardContainer) findViewById(R.id.ccPerro);
 
-        ListaPerrosDTO perros;
+        ListaPerrosDTO listaPerrosDTO = (ListaPerrosDTO) getIntent().getSerializableExtra("perros");
+        List<MascotaDTO> perros=new ArrayList<>(listaPerrosDTO.getPerros());
 
-        Intent intent= new Intent();
-        try {
-            perros = (ListaPerrosDTO) intent.getSerializableExtra("perros");
-            List<MascotaDTO> listaPerros=new ArrayList<>(perros.getPerros());
-
-            for (MascotaDTO perro : listaPerros) {
-                System.out.println(perro.getNombre());
-            }
-        }catch (Exception e){
-            System.out.println(e.toString());
-        }
         final SimpleCardStackAdapter adapter = new SimpleCardStackAdapter(getApplicationContext());
+        for(MascotaDTO perro : perros){
+            adapter.add(new CardModel(perro.getNombre() +", "+ perro.getEdad() , "", ContextCompat.getDrawable(this, R.drawable.picture1)));
 
-        adapter.add(new CardModel("Title1", "Description goes here", ContextCompat.getDrawable(this, R.drawable.picture1)));
-        adapter.add(new CardModel("Title2", "Description goes here", ContextCompat.getDrawable(this, R.drawable.prueba)));
+        }
+           // adapter.add(new CardModel("Title1", "Description goes here", ContextCompat.getDrawable(this, R.drawable.picture1)));
 
         mCardContainer.setAdapter(adapter);
         ((ImageView) findViewById(com.andtinder.R.id.like)).setOnClickListener(new View.OnClickListener() {
