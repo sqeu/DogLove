@@ -17,6 +17,7 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
 }
 
 dependencies {
@@ -30,5 +31,8 @@ dependencies {
     compile 'com.parse:parse-android:1.10.3'
     compile 'com.facebook.android:facebook-android-sdk:4.6.0'
     compile 'com.squareup.picasso:picasso:2.5.2'
+    compile "com.android.support:support-v4:23.0.1"
+    compile 'com.android.support:design:23.0.1'
+    compile 'com.google.android.gms:play-services-gcm:8.1.0'
 
 }

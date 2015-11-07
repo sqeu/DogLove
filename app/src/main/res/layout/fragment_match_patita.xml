@@ -1,17 +1,15 @@
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:layout_height="match_parent"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
-    tools:context="com.love.dog.doglove.MatchPatitaActivity"
+    tools:context="com.love.dog.doglove.MatchPatitaFragment"
     android:orientation="vertical"
-    android:background="@drawable/fondo_m"
-    >
-
+    android:background="@drawable/fondo_m">
 
     <TextView
         android:layout_width="wrap_content"
@@ -60,7 +58,7 @@
             app:border_color="#EEEEEE"
             app:border_width="4dp"
             app:shadow="true"
-           android:layout_marginLeft="20dp"
+            android:layout_marginLeft="20dp"
 
             />
     </LinearLayout>
@@ -83,5 +81,4 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="46dp" />
 
-
-</RelativeLayout>
+</FrameLayout>

@@ -37,6 +37,7 @@ public class CardContainer extends AdapterView<ListAdapter> {
     private int mActivePointerId = INVALID_POINTER_ID;
     private static final double DISORDERED_MAX_ROTATION_RADIANS = Math.PI / 64;
     private int mNumberOfCards = -1;
+
     private final DataSetObserver mDataSetObserver = new DataSetObserver() {
         @Override
         public void onChanged() {
@@ -336,6 +337,10 @@ public class CardContainer extends AdapterView<ListAdapter> {
         return true;
     }
 
+    CardModel cartaActual;
+
+
+
     @Override
     public boolean onInterceptTouchEvent(MotionEvent event) {
         if (mTopCard == null) {
@@ -352,7 +357,6 @@ public class CardContainer extends AdapterView<ListAdapter> {
                 mTopCard.getHitRect(childRect);
 
                 CardModel cardModel = (CardModel)getAdapter().getItem(getChildCount()-1);
-
                 if (cardModel.getOnClickListener() != null) {
                     cardModel.getOnClickListener().OnClickListener();
                 }
@@ -437,7 +441,13 @@ public class CardContainer extends AdapterView<ListAdapter> {
 
         removeViewInLayout(topCard);
         ensureFull();
+
     }
+public CardModel getCartaActual(){
+    return (CardModel) getAdapter().getItem(getChildCount()-1);
+}
+
+
     private class GestureListener extends SimpleOnGestureListener {
         @Override
         public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
@@ -486,7 +496,7 @@ public class CardContainer extends AdapterView<ListAdapter> {
                             @Override
                             public void onAnimationEnd(Animator animation) {
                                 removeViewInLayout(topCard);
-                                Log.w("","SELLIMINO");
+                                //Log.w("","SELLIMINO");
                                 ensureFull();
                             }
 

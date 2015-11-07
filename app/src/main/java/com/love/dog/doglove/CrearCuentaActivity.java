@@ -1,16 +1,17 @@
 package com.love.dog.doglove;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.net.ParseException;
 import android.net.Uri;
 import android.os.Environment;
 import android.provider.MediaStore;
-import android.support.v7.app.ActionBarActivity;
+
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -19,11 +20,15 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import com.love.dog.doglove.gps.GPSTracker;
 import com.love.dog.doglove.presenter.IRegistroPresenter;
 import com.love.dog.doglove.presenter.RegistroPresenter;
 import com.love.dog.doglove.view.RegistroView;
+import com.parse.GetCallback;
+import com.parse.GetDataCallback;
 import com.parse.ParseFile;
 import com.parse.ParseObject;
+import com.parse.ParseQuery;
 import com.parse.SaveCallback;
 import com.pkmmte.view.CircularImageView;
 
@@ -35,14 +40,18 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 //AppCompatActivity
-public class CrearCuentaActivity extends ActionBarActivity implements View.OnClickListener, RegistroView {
+public class CrearCuentaActivity extends Activity implements View.OnClickListener, RegistroView {
     ImageButton butCrearCuenta;
     CircularImageView imagenPerfil;
     EditText editNombre, editPass, editEmail, editApellido;
-    private static final int  SELECT_FILE=2;
+    private static final int SELECT_FILE = 2;
     private static final int REQUEST_TAKE_PHOTO = 1;
     private File photoFile = null;
-
+    GPSTracker gps;
+    private ProgressDialog progressDialog;
+    String idFoto=null;
+    double latitude;
+    double longitude;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,7 +68,71 @@ public class CrearCuentaActivity extends ActionBarActivity implements View.OnCli
         imagenPerfil = (CircularImageView) findViewById(R.id.circularImagePerfil);
         imagenPerfil.setOnClickListener(this);
 
+        //gps
+        gps = new GPSTracker(this);
+
+        if (gps.canGetLocation()) {
+            latitude = gps.getLatitude();
+            longitude = gps.getLongitude();
+
+            Toast.makeText(
+                    getApplicationContext(),
+                    "Your Location is -\nLat: " + latitude + "\nLong: "
+                            + longitude, Toast.LENGTH_LONG).show();
+        } else {
+            gps.showSettingsAlert();
+        }
         // circularImageView.setImageResource(R.drawable.logo);
+
+
+        //9KSJIHrjo2
+        progressDialog = ProgressDialog.show(this, "",
+                "Downloading Image...", true);
+        ParseQuery<ParseObject> query = new ParseQuery<ParseObject>(
+                "ImagenDueno");
+
+        // Locate the objectId from the class
+        query.getInBackground("9KSJIHrjo2",
+                new GetCallback<ParseObject>() {
+
+                    @Override
+                    public void done(ParseObject object, com.parse.ParseException e) {
+                        ParseFile fileObject = (ParseFile) object
+                                .get("ImageFile");
+                        fileObject
+                                .getDataInBackground(new GetDataCallback() {
+
+                                    @Override
+                                    public void done(byte[] data, com.parse.ParseException e) {
+                                        if (e == null) {
+                                            Log.d("test",
+                                                    "We've got data in data.");
+                                            // Decode the Byte[] into
+                                            // Bitmap
+                                            Bitmap bmp = BitmapFactory
+                                                    .decodeByteArray(
+                                                            data, 0,
+                                                            data.length);
+
+                                            imagenPerfil.setImageBitmap(bmp);
+
+                                            // Close progress dialog
+                                            progressDialog.dismiss();
+
+                                        } else {
+                                            Log.d("test",
+                                                    "There was a problem downloading the data.");
+                                        }
+                                    }
+
+
+                                });
+                    }
+
+
+                });
+
+
     }
 
     public void onClick(View view) {
@@ -73,9 +146,13 @@ public class CrearCuentaActivity extends ActionBarActivity implements View.OnCli
             /* pRUEBA =
             onRegistroCorrecto();**/
 
-            IRegistroPresenter presenter = new RegistroPresenter(this);
-            presenter.registrar(email, pass, nombre, apellido);
-        }else {
+            if(idFoto!=null){
+                IRegistroPresenter presenter = new RegistroPresenter(this);
+                presenter.registrar(email, pass, nombre, apellido, idFoto, Double.toString(latitude), Double.toString(longitude));
+            }else{
+                Toast.makeText(this, "Escoja una foto",Toast.LENGTH_LONG).show();
+            }
+        } else {
             selectImage();
         }
 
@@ -122,49 +199,10 @@ public class CrearCuentaActivity extends ActionBarActivity implements View.OnCli
         return super.onOptionsItemSelected(item);
     }
 ///////////////////////FOTOS
-    private void subirFoto(Bitmap foto){
-        Bitmap bitmap = foto;
-        // Convert it to byte
-        ByteArrayOutputStream stream = new ByteArrayOutputStream();
-        // Compress image to lower quality scale 1 - 100
-        bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
-        byte[] image = stream.toByteArray();
-
-        // Create the ParseFile
-        ParseFile file = new ParseFile("androidbegin.png", image);
-        // Upload the image into Parse Cloud
-        file.saveInBackground();
-
-        // Create a New Class called "ImageUpload" in Parse
-        final ParseObject imgupload = new ParseObject("ImagenDueno");
-        // Create a column named "ImageName" and set the string
-        imgupload.put("ImageName", "FotoPerfil");
-
-        // Create a column named "ImageFile" and insert the image
-        imgupload.put("ImageFile", file);
-
-        // Create the class and the columns
-        imgupload.saveInBackground(new SaveCallback() {
-            @Override
-            public void done(com.parse.ParseException e) {
-                if (e == null) {
-                    // Success!
-                    String objectId = imgupload.getObjectId();
-                    System.out.println("ID FOTO: "+objectId);
-                } else {
-                    // Failure!
-                }
-
-            }
-        });
-
-
-    }
-
 
 
     private void selectImage() {
-        final CharSequence[] items = { "Take Photo", "Choose from Library", "Cancel" };
+        final CharSequence[] items = {"Take Photo", "Choose from Library", "Cancel"};
         AlertDialog.Builder builder = new AlertDialog.Builder(CrearCuentaActivity.this);
         builder.setTitle("Usa una foto");
         builder.setItems(items, new DialogInterface.OnClickListener() {
@@ -205,8 +243,6 @@ public class CrearCuentaActivity extends ActionBarActivity implements View.OnCli
                 takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT,
                         Uri.fromFile(photoFile));
                 startActivityForResult(takePictureIntent, REQUEST_TAKE_PHOTO);
-                Log.w("FOTO ", "LLEGO ACA2");
-
             }
         }
 
@@ -232,18 +268,17 @@ public class CrearCuentaActivity extends ActionBarActivity implements View.OnCli
     }
 
 
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode==REQUEST_TAKE_PHOTO){
+        if (requestCode == REQUEST_TAKE_PHOTO) {
             if (resultCode == RESULT_OK) {
                 Bitmap bitmap = BitmapFactory.decodeFile(photoFile.getPath());
                 imagenPerfil.setImageBitmap(bitmap);
                 subirFoto(bitmap);
             }
-        }else if(requestCode==SELECT_FILE){
+        } else if (requestCode == SELECT_FILE) {
             if (resultCode == RESULT_OK) {
                 Uri selectedImageUri = data.getData();
                 imagenPerfil.setImageURI(selectedImageUri);
@@ -255,6 +290,47 @@ public class CrearCuentaActivity extends ActionBarActivity implements View.OnCli
                 }
             }
         }
+    }
+
+    private void subirFoto(Bitmap foto) {
+        Bitmap bitmap = foto;
+        // Convert it to byte
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        // Compress image to lower quality scale 1 - 100
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
+        byte[] image = stream.toByteArray();
+
+        // Create the ParseFile
+        ParseFile file = new ParseFile("androidbegin.png", image);
+        // Upload the image into Parse Cloud
+        file.saveInBackground();
+
+        // Create a New Class called "ImageUpload" in Parse
+        final ParseObject imgupload = new ParseObject("ImagenDueno");
+        // Create a column named "ImageName" and set the string
+        imgupload.put("ImageName", "FotoPerfil");
+
+        // Create a column named "ImageFile" and insert the image
+        imgupload.put("ImageFile", file);
+
+        // Create the class and the columns
+        imgupload.saveInBackground(new SaveCallback() {
+            @Override
+            public void done(com.parse.ParseException e) {
+                if (e == null) {
+                    // Success!
+                    Object objectId = imgupload.getObjectId();
+                    System.out.println("ID FOTO: " + objectId);
+                    idFoto=objectId.toString();
+                    //9KSJIHrjo2
+                } else {
+                    System.out.println("ALGO FALLO, SUBIEDNO IMAGEN");
+                }
+
+            }
+        });
+
+    }
         /*switch (requestCode) {
             case REQUEST_TAKE_PHOTO:
                 if (resultCode == RESULT_OK) {
@@ -275,5 +351,5 @@ public class CrearCuentaActivity extends ActionBarActivity implements View.OnCli
                 }
 
         }*/
-    }
+
 }

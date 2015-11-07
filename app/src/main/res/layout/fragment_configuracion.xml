@@ -1,0 +1,38 @@
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="com.love.dog.doglove.MiPerfilFragment"
+    android:background="@drawable/fondo_m"
+    >
+
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center">
+
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Notificacion"
+            android:id="@+id/checkBoxNotificacion"
+            android:layout_gravity="center" />
+
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Patita nueva"
+            android:id="@+id/checkBoxPatitaNueva"
+            android:layout_gravity="center" />
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Vibracion"
+            android:id="@+id/checkBoxVibracion"
+            android:layout_gravity="left" />
+    </LinearLayout>
+</FrameLayout>

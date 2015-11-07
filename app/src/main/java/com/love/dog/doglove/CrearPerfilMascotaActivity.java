@@ -1,5 +1,6 @@
 package com.love.dog.doglove;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -41,7 +42,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-public class CrearPerfilMascotaActivity extends AppCompatActivity implements View.OnClickListener,RegistroMascotaView {
+public class CrearPerfilMascotaActivity extends Activity implements View.OnClickListener,RegistroMascotaView {
 
     EditText editMascota,editEdad;
     Spinner spinRazas;
@@ -51,7 +52,7 @@ public class CrearPerfilMascotaActivity extends AppCompatActivity implements Vie
     private static final int REQUEST_TAKE_PHOTO = 1;
     private File photoFile = null;
     private CircularImageView imagenPerfilMascota;
-
+    String idFoto=null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,7 +64,7 @@ public class CrearPerfilMascotaActivity extends AppCompatActivity implements Vie
         spinRazas=(Spinner)findViewById(R.id.spinnerRaza);
         Intent intent = getIntent();
         idDueno= intent.getIntExtra("id",0)+ "";
-        System.out.println(idDueno);
+        System.out.println(idDueno);//se tiene q pasar a backend para q busque todos los perros menos de este dueno
 
         butCrearPerfil=(ImageButton) findViewById(R.id.imageButtonCrearCuentaMascota);
         butCrearPerfil.setOnClickListener(this);
@@ -84,8 +85,13 @@ public class CrearPerfilMascotaActivity extends AppCompatActivity implements Vie
            String nombre = editMascota.getText().toString(); //obtener info, lo ideal es tener una clase q vea logica de ogin,
             raza=String.valueOf(spinRazas.getSelectedItem());
             String edad = editEdad.getText().toString();
-            IRegistroMascotaPresenter presenter = new RegistroMascotaPresenter(this);
-            presenter.registrar(nombre,raza,edad,idDueno);
+            if(idFoto!=null){
+                IRegistroMascotaPresenter presenter = new RegistroMascotaPresenter(this);
+                presenter.registrar(nombre,raza,edad,idDueno,idFoto);
+            }else{
+                Toast.makeText(this, "Escoja una foto",Toast.LENGTH_LONG).show();
+            }
+
             Log.w("mmya ", nombre + "111111");
         }else {
             selectImage();
@@ -97,7 +103,7 @@ public class CrearPerfilMascotaActivity extends AppCompatActivity implements Vie
     @Override
     public void onRegistroCorrecto(List<MascotaDTO> perros) {
         Intent intent = new Intent();
-        intent.setClass(this, SwipeActivity.class);
+        intent.setClass(this, ContenedorActivity.class);
         //System.out.println("CPMA: "+perros.get(1).getNombre());
         ListaPerrosDTO listaPerrosDTO=new ListaPerrosDTO(perros);
         intent.putExtra("perros",listaPerrosDTO);
@@ -147,6 +153,7 @@ public class CrearPerfilMascotaActivity extends AppCompatActivity implements Vie
                 if (e == null) {
                     // Success!
                     String objectId = imgupload.getObjectId();
+                    idFoto=objectId;
                     System.out.println("ID FOTO MASCOTA: "+objectId);
                 } else {
                     // Failure!

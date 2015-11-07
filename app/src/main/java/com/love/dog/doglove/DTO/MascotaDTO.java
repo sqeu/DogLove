@@ -11,6 +11,7 @@ public class MascotaDTO implements Serializable{
     private String raza;
     private String edad;
     private int idcliente;
+    private String idFoto;
 
     public MascotaDTO(){}
 
@@ -20,6 +21,15 @@ public class MascotaDTO implements Serializable{
         this.edad = edad;
 
     }
+
+    public String getIdFoto() {
+        return idFoto;
+    }
+
+    public void setIdFoto(String idFoto) {
+        this.idFoto = idFoto;
+    }
+
     public String getNombre() {
         return nombre;
     }

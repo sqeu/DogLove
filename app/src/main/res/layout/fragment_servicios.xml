@@ -1,0 +1,96 @@
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="com.love.dog.doglove.ServiciosFragment"
+    android:background="@drawable/fondo_m"
+    >
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/imageView2"
+            android:background="@drawable/encuentro_canino"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Organización de Encuentros Caninos"
+            android:id="@+id/textView10"
+            android:layout_gravity="center_horizontal" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Lleva a tu mascota a un paseo por Cieneguilla
+Teléfono: 985697856
+Mail: Encuentroscaninos@doglove.com.pe
+Horarios: Sábados y Domingos de 9am a 5pm "
+            android:id="@+id/textView6"
+            android:layout_gravity="left" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/imageView3"
+            android:background="@drawable/sesion_fotos" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Sesión de fotos"
+            android:id="@+id/textView11"
+            android:layout_gravity="center_horizontal" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Guarda los mejores recuerdos de tu mascota en una instantánea.
+Teléfono: 227 - 0025
+Mail: sesiondefotos@doglove.com.pe"
+            android:id="@+id/textView12"
+            android:layout_gravity="left" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/imageView4"
+            android:background="@drawable/salon_belleza"
+            android:layout_gravity="center_horizontal" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Salón de belleza"
+            android:layout_gravity="center_horizontal" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Engríe a tu mascota con un día en el salón de belleza
+Teléfono: 2259568
+Mail: salondebellezas@doglove.com.pe
+Horarios: Lunes a Viernes de 9am a 5pm
+Lugar: Av. San Borja Norte 685 - San Borja
+"
+            android:layout_gravity="left" />
+    </LinearLayout>
+    </ScrollView>
+</FrameLayout>

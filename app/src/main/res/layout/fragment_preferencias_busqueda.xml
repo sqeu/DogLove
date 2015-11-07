@@ -1,0 +1,137 @@
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    tools:context="com.love.dog.doglove.PrefBusquedaFragment"
+    android:background="@drawable/fondo_m"
+
+    >
+
+    <com.pkmmte.view.CircularImageView
+        android:layout_width="200px"
+        android:layout_height="200px"
+        android:src="@drawable/prueba"
+        android:id="@+id/circularImagePerfil"
+        app:border="true"
+        app:border_color="#EEEEEE"
+        app:border_width="4dp"
+        app:shadow="true"
+        android:layout_column="4"
+        android:layout_gravity="center_horizontal|top"
+        android:layout_marginTop="40dp"
+        />
+
+
+    <TableLayout
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center|bottom"
+        android:layout_marginBottom="140dp">
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </TableRow>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Selecciona preferencias de tu mascota"
+            android:id="@+id/textView14"
+            android:layout_gravity="center"
+            android:layout_marginBottom="10dp"
+            />
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Edad:"
+                android:id="@+id/textView15"
+                />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:ems="10"
+                android:id="@+id/editTextEdadPred"
+                android:layout_column="13" />
+        </TableRow>
+
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Raza:"
+                android:id="@+id/textView16"
+                android:layout_column="0" />
+
+            <Spinner
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/spinnerRazaPref"
+            android:layout_gravity="left"
+            android:entries="@array/raza_array"
+                android:layout_column="13" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Distancia:"
+                android:id="@+id/textView17"
+                android:layout_column="0" />
+
+            <Spinner
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/spinnerDistancia"
+                android:layout_gravity="left"
+                android:entries="@array/raza_distancia"
+                android:layout_column="13" />
+        </TableRow>
+
+    </TableLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="NombreMascota"
+        android:id="@+id/textView13"
+        android:layout_marginBottom="70dp"
+        android:layout_column="13"
+        android:layout_gravity="center" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Aceptar"
+        android:id="@+id/buttonAceptarPref"
+        android:layout_gravity="center_horizontal|bottom"
+        android:layout_marginBottom="70dp"/>
+
+
+</FrameLayout>

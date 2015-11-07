@@ -27,17 +27,19 @@ public class RegistroPresenter implements IRegistroPresenter{
     }
 
     //Este metodo manda la data al Servlet
-    public void registrar(String correo, String password, String nombre, String apellido){
+    public void registrar(String correo, String password, String nombre, String apellido,String idFoto,String latitud, String longitud){
 
         UsuarioDTO usuario= new UsuarioDTO();
         usuario.setCorreo(correo);
         usuario.setPassword(password);
         usuario.setNombre(nombre);
         usuario.setApellido(apellido);
+        usuario.setIdFoto(idFoto);
+        usuario.setLatitud(latitud);
+        usuario.setLongitud(longitud);
         final String json= new Gson().toJson(usuario);
 
         RequestQueue queue = view.getApplicationController().getRequestQueue();
-
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
                 new Response.Listener<String>() {
 

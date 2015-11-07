@@ -9,8 +9,35 @@ public class UsuarioDTO {
     private String password;
     private String nombre;
     private String apellido;
+    private String idFoto;
+    private String latitud;
+    private String longitud;
 
     public UsuarioDTO(){}
+
+    public String getLatitud() {
+        return latitud;
+    }
+
+    public void setLatitud(String latitud) {
+        this.latitud = latitud;
+    }
+
+    public String getLongitud() {
+        return longitud;
+    }
+
+    public void setLongitud(String longitud) {
+        this.longitud = longitud;
+    }
+
+    public String getIdFoto() {
+        return idFoto;
+    }
+
+    public void setIdFoto(String idFoto) {
+        this.idFoto = idFoto;
+    }
 
     public String getCorreo() {
         return correo;

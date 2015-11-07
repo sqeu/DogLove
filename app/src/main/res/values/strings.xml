@@ -20,4 +20,21 @@
     <string name="profile_me">My Profile Pic</string>
     <string name="profile_other">Other profile pic</string>
 
+    <string-array name="raza_distancia">
+        <item>100</item>
+        <item>200</item>
+    </string-array>
+
+    <string name="title_activity_drawer_prueba">DrawerPrueba</string>
+    <string name="drawer_open">Open navigation drawer</string>
+    <string name="drawer_close">Close navigation drawer</string>
+    <string name="action_websearch">Web search</string>
+    <string name="app_not_available">Sorry, there\'s no web browser available</string>
+    <string name="men_configuracion">Configuracion</string>
+    <string name="men_mi_perfil">Perfil</string>
+    <string name="men_swipe">Buscar pareja</string>
+    <string name="men_pref_busqueda">Preferencias de Busqueda</string>
+    <string name="men_servicios">Servicios</string>
+    <string name="men_historial">Historial</string>
+
 </resources>

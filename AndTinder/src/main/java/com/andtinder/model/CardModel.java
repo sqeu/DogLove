@@ -31,6 +31,8 @@ public class CardModel {
 	private Drawable cardDislikeImageDrawable;
 	private boolean isLike = false;
 
+	private int idCliente;
+
     private OnCardDismissedListener mOnCardDismissedListener = null;
 
     private OnClickListener mOnClickListener = null;
@@ -45,19 +47,29 @@ public class CardModel {
     }
 
 	public CardModel() {
-		this(null, null, (Drawable)null);
+		this(null, null, (Drawable)null,0);
 	}
 
-	public CardModel(String title, String description, Drawable cardImage) {
+	public CardModel(String title, String description, Drawable cardImage,int idCliente) {
 		this.title = title;
 		this.description = description;
 		this.cardImageDrawable = cardImage;
+		this.idCliente=idCliente;
 	}
 
-	public CardModel(String title, String description, Bitmap cardImage) {
+	public CardModel(String title, String description, Bitmap cardImage,int idCliente) {
 		this.title = title;
 		this.description = description;
 		this.cardImageDrawable = new BitmapDrawable(null, cardImage);
+		this.idCliente=idCliente;
+	}
+
+	public int getIdCliente() {
+		return idCliente;
+	}
+
+	public void setIdCliente(int idCliente) {
+		this.idCliente = idCliente;
 	}
 
 	public String getTitle() {

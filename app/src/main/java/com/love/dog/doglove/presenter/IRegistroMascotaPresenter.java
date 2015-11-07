@@ -5,5 +5,5 @@ package com.love.dog.doglove.presenter;
  */
 public interface IRegistroMascotaPresenter {
 
-    public void registrar(String nombre, String raza , String edad, String idCliente);
+    public void registrar(String nombre, String raza , String edad, String idCliente,String idFoto);
 }

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/menPerfil"
+        android:icon="@drawable/messenger_bubble_large_blue"
+        android:title="@string/men_mi_perfil"/>
+    <item
+        android:id="@+id/menConfiguracion"
+        android:icon="@drawable/messenger_bubble_large_white"
+        android:title="@string/men_configuracion"/>
+    <item
+        android:id="@+id/menPrefDeBusqueda"
+        android:icon="@drawable/messenger_bubble_large_blue"
+        android:title="@string/men_pref_busqueda"/>
+    <item
+        android:id="@+id/menServicios"
+        android:icon="@drawable/messenger_bubble_large_blue"
+        android:title="@string/men_servicios"/>
+    <item
+        android:id="@+id/menHistorial"
+        android:icon="@drawable/messenger_bubble_large_blue"
+        android:title="@string/men_historial"/>
+    <item
+        android:id="@+id/menSwipe"
+        android:icon="@drawable/messenger_bubble_large_blue"
+        android:title="@string/men_swipe"/>
+    <!-- <item
+         android:id="@+id/menAmigos"
+         android:icon="@drawable/com_facebook_tooltip_black_bottomnub"
+         android:title="@string/men_amigos"/>-->
+
+</menu>
