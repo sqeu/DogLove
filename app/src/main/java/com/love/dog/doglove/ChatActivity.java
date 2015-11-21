@@ -96,7 +96,7 @@ public class ChatActivity extends AppCompatActivity {
         mMessages = new ArrayList<Message>();
         lvChat.setTranscriptMode(1);
         mFirstLoad = true;
-        mAdapter = new ChatListAdapter(ChatActivity.this, sUserId, mMessages);
+      //  mAdapter = new ChatListAdapter(ChatActivity.this, sUserId, mMessages);
         lvChat.setAdapter(mAdapter);
         // When send button is clicked, create message object on Parse
         btSend.setOnClickListener(new View.OnClickListener() {

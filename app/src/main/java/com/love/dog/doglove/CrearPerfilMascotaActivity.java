@@ -64,7 +64,7 @@ public class CrearPerfilMascotaActivity extends Activity implements View.OnClick
         spinRazas=(Spinner)findViewById(R.id.spinnerRaza);
         Intent intent = getIntent();
         idDueno= intent.getIntExtra("id",0)+ "";
-        System.out.println(idDueno);//se tiene q pasar a backend para q busque todos los perros menos de este dueno
+        //System.out.println(idDueno);//se tiene q pasar a backend para q busque todos los perros menos de este dueno
 
         butCrearPerfil=(ImageButton) findViewById(R.id.imageButtonCrearCuentaMascota);
         butCrearPerfil.setOnClickListener(this);
@@ -101,12 +101,14 @@ public class CrearPerfilMascotaActivity extends Activity implements View.OnClick
 
 
     @Override
-    public void onRegistroCorrecto(List<MascotaDTO> perros) {
+    public void onRegistroCorrecto(List<MascotaDTO> perros,String idPerro) {
         Intent intent = new Intent();
         intent.setClass(this, ContenedorActivity.class);
+        intent.putExtra("id",idDueno);
         //System.out.println("CPMA: "+perros.get(1).getNombre());
         ListaPerrosDTO listaPerrosDTO=new ListaPerrosDTO(perros);
         intent.putExtra("perros",listaPerrosDTO);
+        intent.putExtra("idPerro",idPerro);
         this.startActivity(intent);
         //getSerializableextra
     }

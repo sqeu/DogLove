@@ -12,6 +12,10 @@ public class MascotaDTO implements Serializable{
     private String edad;
     private int idcliente;
     private String idFoto;
+    private String idMascota;
+    private String razaB;
+    private String edadB;
+    private String distanciaB;
 
     public MascotaDTO(){}
 
@@ -20,6 +24,38 @@ public class MascotaDTO implements Serializable{
         this.raza = raza;
         this.edad = edad;
 
+    }
+
+    public String getRazaB() {
+        return razaB;
+    }
+
+    public void setRazaB(String razaB) {
+        this.razaB = razaB;
+    }
+
+    public String getEdadB() {
+        return edadB;
+    }
+
+    public void setEdadB(String edadB) {
+        this.edadB = edadB;
+    }
+
+    public String getDistanciaB() {
+        return distanciaB;
+    }
+
+    public void setDistanciaB(String distanciaB) {
+        this.distanciaB = distanciaB;
+    }
+
+    public String getIdMascota() {
+        return idMascota;
+    }
+
+    public void setIdMascota(String idMascota) {
+        this.idMascota = idMascota;
     }
 
     public String getIdFoto() {

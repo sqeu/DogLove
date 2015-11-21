@@ -129,6 +129,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Aceptar"
+        android:background="#DC143C"
         android:id="@+id/buttonAceptarPref"
         android:layout_gravity="center_horizontal|bottom"
         android:layout_marginBottom="70dp"/>

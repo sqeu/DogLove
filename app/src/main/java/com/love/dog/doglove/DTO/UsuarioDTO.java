@@ -12,8 +12,17 @@ public class UsuarioDTO {
     private String idFoto;
     private String latitud;
     private String longitud;
+    private String idGoogle;
 
     public UsuarioDTO(){}
+
+    public String getIdGoogle() {
+        return idGoogle;
+    }
+
+    public void setIdGoogle(String idGoogle) {
+        this.idGoogle = idGoogle;
+    }
 
     public String getLatitud() {
         return latitud;

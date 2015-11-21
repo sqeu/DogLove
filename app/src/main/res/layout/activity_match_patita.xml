@@ -70,6 +70,7 @@
         android:layout_height="wrap_content"
         android:text="Iniciar chat"
         android:id="@+id/buttonIniciarChat"
+        android:background="#DC143C"
         android:layout_marginTop="55dp"
         android:layout_below="@+id/linearLayout"
         android:layout_centerHorizontal="true" />
@@ -78,6 +79,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Seguir Buscando"
+        android:background="#DC143C"
         android:id="@+id/buttonSeguirBuscando"
         android:layout_below="@+id/buttonIniciarChat"
         android:layout_centerHorizontal="true"

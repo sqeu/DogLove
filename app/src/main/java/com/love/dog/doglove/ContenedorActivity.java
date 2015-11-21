@@ -3,6 +3,7 @@ package com.love.dog.doglove;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -17,6 +18,8 @@ public class ContenedorActivity extends Activity implements NavigationView.OnNav
     NavigationView navigation;
     DrawerLayout dlaContenedor;
     Toolbar toolbar;
+    String idDueno;
+    String idPerro,idChat;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,7 +31,7 @@ public class ContenedorActivity extends Activity implements NavigationView.OnNav
         toolbar = (Toolbar) findViewById(R.id.toolbar);
 
         //setSupportActionBar(toolbar);
-        toolbar.setNavigationIcon(R.mipmap.ic_launcher);
+        toolbar.setNavigationIcon(R.drawable.footprint);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -36,12 +39,28 @@ public class ContenedorActivity extends Activity implements NavigationView.OnNav
             }
         });
 
-        Fragment swipeFragment = SwipeFragment.newInstance();
-        FragmentTransaction ft = getFragmentManager().beginTransaction();
-        ft.replace(R.id.flaContenido, swipeFragment);
-        ft.commit();
 
+       // ft.commit();
+
+        FragmentTransaction ft;
+        Intent intent = getIntent();
+        idDueno= intent.getStringExtra("id");//funciona
+        idPerro=intent.getStringExtra("idPerro");
+        idChat=intent.getStringExtra("idchat");
+        System.out.println("contenedor: "+idChat);
+        if(idChat!=null){
+            Fragment chatFragment = ChatFragment.newInstance();
+            ft= getFragmentManager().beginTransaction();
+            ft.replace(R.id.flaContenido, chatFragment);
+        }else{
+            Fragment swipeFragment = SwipeFragment.newInstance();
+            ft= getFragmentManager().beginTransaction();
+            ft.replace(R.id.flaContenido, swipeFragment);
+        }
+        ft.commit();
         navigation.setNavigationItemSelectedListener(this);
+
+
     }
 
     @Override
@@ -72,10 +91,10 @@ public class ContenedorActivity extends Activity implements NavigationView.OnNav
         Fragment fragment ;
         switch(menuItem.getItemId()){
             case R.id.menPerfil:
-                Fragment miPerifl =
+                fragment =
                         MiPerfilFragment.newInstance();
 
-                ft.replace(R.id.flaContenido, miPerifl);
+                ft.replace(R.id.flaContenido, fragment);
                 ft.commit();
                 dlaContenedor.closeDrawers();
                 return true;

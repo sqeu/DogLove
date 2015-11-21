@@ -3,10 +3,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     tools:context="com.love.dog.doglove.HistorialFragment"
     android:background="@drawable/fondo_m"
 
     >
+
+
+    <ListView
+        android:id="@+id/list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:divider="@color/com_facebook_blue"
+        android:dividerHeight="1dp"
+        tools:listitem="@layout/chat_item_lista" >
+    </ListView>
+
     </FrameLayout>

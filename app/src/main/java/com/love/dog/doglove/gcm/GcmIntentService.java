@@ -22,6 +22,7 @@ public class GcmIntentService extends IntentService {
     private static final String TAG = "GcmIntentService";
     private NotificationManager mNotificationManager;
     NotificationCompat.Builder builder;
+    String idDueno1,  idMascota1,  idDuenoPareja,  idMascotaPareja,idChat;
 
     public GcmIntentService() {
         super("GcmIntentService");
@@ -47,8 +48,14 @@ public class GcmIntentService extends IntentService {
                     MESSAGE_TYPE_MESSAGE.equals(messageType)) {
                 Log.i(TAG, "Completed work @ " + SystemClock.elapsedRealtime());
 
-                sendNotification(extras.toString());//esto es lo q se envia en notifiacione
+
                 System.out.println(extras.getString("message"));//gettea partes individuales
+                idDueno1 =extras.getString("iddueno1");
+                idMascota1= extras.getString("idmascota1");
+                idDuenoPareja=extras.getString("iddueno2");
+                idMascotaPareja= extras.getString("idmascota2");
+                idChat=extras.getString("idchat");
+                sendNotification(extras.toString()); //esto es lo q se envia en notifiacione
                 Log.i(TAG, "Received: " + extras.toString());
             }
         }
@@ -59,17 +66,27 @@ public class GcmIntentService extends IntentService {
     private void sendNotification(String msg) {
         mNotificationManager = (NotificationManager)
                 this.getSystemService(Context.NOTIFICATION_SERVICE);
-
-        PendingIntent contentIntent = PendingIntent.getActivity(this, 0,
-                new Intent(this, MatchPatitaActivity.class), 0);
-
+//intent crear uno nuevo y poner la data ahi
+        Intent intent = new Intent(this, MatchPatitaActivity.class);
+        intent.putExtra("iddueno1", idDueno1);
+        intent.putExtra("idmascota1", idMascota1);
+        intent.putExtra("iddueno2", idDuenoPareja);
+        intent.putExtra("idmascota2", idMascotaPareja);
+        intent.putExtra("idchat",idChat);
+        //new Intent(this, MatchPatitaActivity.class)
+        PendingIntent contentIntent = PendingIntent.getActivity(
+                this.getApplicationContext(), (int) (Math.random() * 100),
+               intent , PendingIntent.FLAG_UPDATE_CURRENT);//esto es lo q se abriar al tocar notifiaction
+/*PendingIntent contentIntent = PendingIntent.getActivity(
+        this.getApplicationContext(), 0,
+                intent , 0)*/
         NotificationCompat.Builder mBuilder =
                 new NotificationCompat.Builder(this)
-                        .setSmallIcon(R.drawable.common_signin_btn_icon_dark)
-                        .setContentTitle("DogLove")
+                        .setSmallIcon(R.drawable.dog_bone)
+                        .setContentTitle("Match patita!")
                         .setStyle(new NotificationCompat.BigTextStyle()
-                                .bigText(msg))
-                        .setContentText(msg);
+                                .bigText("Se encontro un match"))//msg
+                        .setContentText("Se encontro un match");
 
         mBuilder.setContentIntent(contentIntent);
         mNotificationManager.notify(NOTIFICATION_ID, mBuilder.build());

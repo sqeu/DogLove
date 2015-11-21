@@ -20,6 +20,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import com.love.dog.doglove.gcm.GCMClientManager;
 import com.love.dog.doglove.gps.GPSTracker;
 import com.love.dog.doglove.presenter.IRegistroPresenter;
 import com.love.dog.doglove.presenter.RegistroPresenter;
@@ -52,6 +53,10 @@ public class CrearCuentaActivity extends Activity implements View.OnClickListene
     String idFoto=null;
     double latitude;
     double longitude;
+
+    String PROJECT_NUMBER = "139161743842";
+
+    String idGoogle;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -84,7 +89,26 @@ public class CrearCuentaActivity extends Activity implements View.OnClickListene
         }
         // circularImageView.setImageResource(R.drawable.logo);
 
+        GCMClientManager pushClientManager = new GCMClientManager(this, PROJECT_NUMBER);
+        pushClientManager.registerIfNeeded(new GCMClientManager.RegistrationCompletedHandler() {
+            @Override
+            public void onSuccess(String registrationId, boolean isNewRegistration) {
 
+                Log.d("Registration id", registrationId);
+                idGoogle=registrationId;
+                //send this registrationId to your server
+                //verificar q notifiacion abra matchactivity pero no abra el registro
+                //poner esto en registro y guardarlo en BD, crear campo paara guardarlo
+            }
+
+            @Override
+            public void onFailure(String ex) {
+                super.onFailure(ex);
+            }
+        });
+
+
+/* OBTENER FOTOS PARA UN IMAGEVIEW
         //9KSJIHrjo2
         progressDialog = ProgressDialog.show(this, "",
                 "Downloading Image...", true);
@@ -132,7 +156,7 @@ public class CrearCuentaActivity extends Activity implements View.OnClickListene
 
                 });
 
-
+*/
     }
 
     public void onClick(View view) {
@@ -148,7 +172,7 @@ public class CrearCuentaActivity extends Activity implements View.OnClickListene
 
             if(idFoto!=null){
                 IRegistroPresenter presenter = new RegistroPresenter(this);
-                presenter.registrar(email, pass, nombre, apellido, idFoto, Double.toString(latitude), Double.toString(longitude));
+                presenter.registrar(email, pass, nombre, apellido, idFoto, Double.toString(latitude), Double.toString(longitude),idGoogle);
             }else{
                 Toast.makeText(this, "Escoja una foto",Toast.LENGTH_LONG).show();
             }

@@ -1,4 +1,4 @@
-<FrameLayout
+<!--<FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
@@ -6,20 +6,29 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="com.love.dog.doglove.ServiciosFragment"
     android:background="@drawable/fondo_m"
-    >
+
+    >-->
 
     <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" >
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+
+        android:background="@drawable/fondo_m"
+        tools:context="com.love.dog.doglove.ServiciosFragment"
+        >
+        <!--android:layout_width="match_parent"
+               android:layout_height="match_parent"-->
     <LinearLayout
         android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_gravity="center">
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        >
 
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
             android:id="@+id/imageView2"
             android:background="@drawable/encuentro_canino"/>
 
@@ -43,8 +52,8 @@ Horarios: Sábados y Domingos de 9am a 5pm "
             android:layout_gravity="left" />
 
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
             android:id="@+id/imageView3"
             android:background="@drawable/sesion_fotos" />
 
@@ -67,8 +76,8 @@ Mail: sesiondefotos@doglove.com.pe"
             android:layout_gravity="left" />
 
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
             android:id="@+id/imageView4"
             android:background="@drawable/salon_belleza"
             android:layout_gravity="center_horizontal" />
@@ -93,4 +102,3 @@ Lugar: Av. San Borja Norte 685 - San Borja
             android:layout_gravity="left" />
     </LinearLayout>
     </ScrollView>
-</FrameLayout>

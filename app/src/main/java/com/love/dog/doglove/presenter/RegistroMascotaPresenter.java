@@ -48,7 +48,7 @@ public class RegistroMascotaPresenter implements IRegistroMascotaPresenter {
                         //System.out.println(responseDTO.getPerros().get(1).getNombre());// PRUEBA
 
                         if (responseDTO.getMsgStatus().equals("OK")){
-                            view.onRegistroCorrecto(responseDTO.getPerros());
+                            view.onRegistroCorrecto(responseDTO.getPerros(),responseDTO.getIdPerro());
                             /*
                         }else if (responseDTO.getMsgStatus().equals("ERROR")){
                             view.onRegistroIncorrecto();

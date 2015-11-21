@@ -10,12 +10,14 @@ public class ResponseDTOconLlistaMascotas {
     private String msgStatus;
     private String msgError;
     private List<MascotaDTO> perros;
+    private String idPerro;
 
-
-    public ResponseDTOconLlistaMascotas(String msgStatus, String msgError, List<MascotaDTO> perros) {
+    public ResponseDTOconLlistaMascotas(String msgStatus, String msgError, List<MascotaDTO> perros,String idPerro) {
         this.msgStatus = msgStatus;
         this.msgError = msgError;
         this.perros = perros;
+        this.idPerro=idPerro;
+
     }
 
     public String getMsgError() {
@@ -42,4 +44,11 @@ public class ResponseDTOconLlistaMascotas {
         this.perros = perros;
     }
 
+    public String getIdPerro() {
+        return idPerro;
+    }
+
+    public void setIdPerro(String idPerro) {
+        this.idPerro = idPerro;
+    }
 }

@@ -6,45 +6,43 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.google.gson.Gson;
+import com.love.dog.doglove.DTO.MensajeDTO;
 import com.love.dog.doglove.DTO.ResponseDTO;
-import com.love.dog.doglove.DTO.ResponseDTOconLlistaMascotas;
 import com.love.dog.doglove.DTO.UsuarioDTO;
-import com.love.dog.doglove.view.LoginFBView;
+import com.love.dog.doglove.view.GenericView;
+import com.love.dog.doglove.view.RegistroView;
 
 /**
- * Created by Hugo on 11/4/2015.
+ * Created by Hugo on 11/14/2015.
  */
-public class LoginFBPresenter implements ILoginFBPresenter{
-    private static final String url = "http://192.168.1.40:8080/PetLove/LoginFBServlet";
-    private LoginFBView view;
+public class RegistroMensajePresenter implements  IRegistroMensajePresenter{
+    private static final String url = "http://192.168.1.40:8080/PetLove/RegistroMensajeServlet";
+    private GenericView view;
 
-    public LoginFBPresenter (LoginFBView view){
+    public RegistroMensajePresenter(GenericView view){
         this.view=view;
     }
 
     @Override
-    public void loginFB(String idFB, String nombre, String apellido, String idFoto, String latitud, String longitud,String idGoogle) {
-        UsuarioDTO usuario= new UsuarioDTO();
-        usuario.setCorreo(idFB);//el token de fb reemplaza el correo
-        usuario.setNombre(nombre);
-        usuario.setApellido(null);
-        usuario.setIdFoto(idFoto);
-        usuario.setLatitud(latitud);
-        usuario.setLongitud(longitud);
-        usuario.setIdGoogle(idGoogle);
-        //la foto del usuario el backend lo guardara a apartir del token
+    public void registrar(String idChat, String mensaje, String idCliente) {
+        MensajeDTO mensajeDTO=new MensajeDTO();
+        mensajeDTO.setIdChat(idChat);
+        mensajeDTO.setIdCliente(idCliente);
+        mensajeDTO.setMensaje(mensaje);
 
-        final String json= new Gson().toJson(usuario);
+
+        final String json= new Gson().toJson(mensajeDTO);
+
         RequestQueue queue = view.getApplicationController().getRequestQueue();
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
                 new Response.Listener<String>() {
 
                     @Override
                     public void onResponse(String response) {
-                        ResponseDTOconLlistaMascotas responseDTO = new Gson().fromJson(response, ResponseDTOconLlistaMascotas.class);
+                        ResponseDTO responseDTO = new Gson().fromJson(response, ResponseDTO.class);
 
                         if (responseDTO.getMsgStatus().equals("OK")){
-                            view.onLoginFBCorrecto(responseDTO.getPerros(),responseDTO.getIdPerro()+"");// este puede ser id del perro o del cleinte
+                            view.onRegistroCorrecto();
 
                             /*
                         }else if (responseDTO.getMsgStatus().equals("ERROR")){
@@ -72,7 +70,7 @@ public class LoginFBPresenter implements ILoginFBPresenter{
             }
         };
 
-        stringRequest.setTag("Login");
+        stringRequest.setTag("Registro");
         queue.add(stringRequest);
     }
 }

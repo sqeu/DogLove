@@ -2,6 +2,7 @@ package com.love.dog.doglove;
 
 import android.app.Fragment;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
@@ -12,12 +13,19 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.andtinder.model.CardModel;
 import com.andtinder.view.CardContainer;
 import com.andtinder.view.SimpleCardStackAdapter;
 import com.love.dog.doglove.DTO.ListaPerrosDTO;
 import com.love.dog.doglove.DTO.MascotaDTO;
+import com.love.dog.doglove.gcm.GCMClientManager;
+import com.love.dog.doglove.presenter.IRegistroMatchPresenter;
+import com.love.dog.doglove.presenter.IRegistroPresenter;
+import com.love.dog.doglove.presenter.RegistroMatchPresenter;
+import com.love.dog.doglove.presenter.RegistroPresenter;
+import com.love.dog.doglove.view.RegistroMatchView;
 import com.parse.GetCallback;
 import com.parse.GetDataCallback;
 import com.parse.ParseFile;
@@ -30,11 +38,14 @@ import java.util.List;
 /**
  * Created by Hugo on 10/24/2015.
  */
-public class SwipeFragment extends Fragment {
+public class SwipeFragment extends Fragment implements RegistroMatchView {
     CardContainer mCardContainer;
     int posicion = 0;
     private ProgressDialog progressDialog;
     CardModel cardModel;
+    private String idDueno;
+    private String idPerro;
+
 
     public static SwipeFragment newInstance() {
         return new SwipeFragment();
@@ -55,6 +66,12 @@ public class SwipeFragment extends Fragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        Intent intent=getActivity().getIntent();
+        idDueno=intent.getStringExtra("id");
+        System.out.println("swipe fragment"+ idDueno);
+        idPerro=intent.getStringExtra("idPerro");
+        System.out.println("swipe fragment, id perro: "+ idPerro);
+
         mCardContainer = (CardContainer) getView().findViewById(R.id.ccPerro);
 
         ListaPerrosDTO listaPerrosDTO = (ListaPerrosDTO) getActivity().getIntent().getSerializableExtra("perros");
@@ -93,7 +110,7 @@ public class SwipeFragment extends Fragment {
                                                                 data, 0,
                                                                 data.length);
                                                 //imagenPerfil.setImageBitmap(bmp);
-                                                cardModel = new CardModel(perro.getNombre() + ", " + perro.getEdad(), "aca le puedo poner id", bmp, perro.getIdcliente());
+                                                cardModel = new CardModel(perro.getNombre() + ", " + perro.getEdad(), "aca le puedo poner id", bmp, Integer.valueOf(perro.getIdMascota()));
 
                                                 // cardModel.setCardImageDrawable( new BitmapDrawable(getResources(), bmp));
                                                 cardModel.setOnCardDismissedListener(new CardModel.OnCardDismissedListener() {
@@ -126,11 +143,11 @@ public class SwipeFragment extends Fragment {
                                                         //System.out.println("hay tantos items en adapter " + posicion);
 
                                                         // System.out.println("hice like a : " + adapter.getCardModel(adapter.getCount()));
-
+                                                        imagenGustada(adapter.getCardModel(posicion).getIdCliente());
                                                         mCardContainer.quitarVista();
                                                         posicion++;
 
-                                                        imagenGustada();
+
                                                     }
                                                 });
 
@@ -168,10 +185,39 @@ public class SwipeFragment extends Fragment {
 
 
 
+
     }
 
 
-    public void imagenGustada() {
+    public void imagenGustada(int idPareja) {
+        IRegistroMatchPresenter presenter = new RegistroMatchPresenter(this);
+        presenter.registrar(idPerro,idPareja+"");
+        System.out.println("esto es lo q se registra");
+        System.out.println("idperro"+idPerro);
+        System.out.println(idPareja);
+    }
 
+    @Override
+    public void onRegistroCorrecto() {
+        System.out.println("Se registro match");
+    }
+
+    @Override
+    public void onError(String msg) {
+        Toast.makeText(
+                getActivity(),
+                "EXC: " + msg,
+                Toast.LENGTH_LONG
+        ).show();
+    }
+
+    @Override
+    public void onMatchEncontrado() {
+        System.out.println("se encontro match");
+    }
+
+    @Override
+    public ApplicationController getApplicationController() {
+        return (ApplicationController) getActivity().getApplication();
     }
 }
