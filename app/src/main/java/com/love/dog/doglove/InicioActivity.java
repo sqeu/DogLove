@@ -309,7 +309,7 @@ public class InicioActivity extends Activity implements View.OnClickListener,Log
             // Create Object of Dialog class
             final Dialog login = new Dialog(this);
             // Set GUI of login screen
-            login.getWindow().setBackgroundDrawable(new ColorDrawable(0));
+           // login.getWindow().setBackgroundDrawable(new ColorDrawable(0));
             login.setContentView(R.layout.login_dialog);
             login.setTitle("Login to DogLove");
 
@@ -362,17 +362,18 @@ public class InicioActivity extends Activity implements View.OnClickListener,Log
 
 
     @Override
-    public void onLoginCorrecto(List<MascotaDTO> perros,String idPerro) {
+    public void onLoginCorrecto(List<MascotaDTO> perros,String idPerro,String idCliente) {
         Intent intent = new Intent();
         intent.setClass(this, ContenedorActivity.class);
         ListaPerrosDTO listaPerrosDTO=new ListaPerrosDTO(perros);
         intent.putExtra("perros", listaPerrosDTO);
+        intent.putExtra("id",idCliente);
         intent.putExtra("idPerro",idPerro);
         this.startActivity(intent);
     }
 
     @Override
-    public void onLoginFBCorrecto(List<MascotaDTO> perros,String idCliente) {
+    public void onLoginFBCorrecto(List<MascotaDTO> perros,String idCliente,String idCliente2) {
         Intent intent = new Intent();
         if(perros==null){
             intent.setClass(this, CrearPerfilMascotaActivity.class);

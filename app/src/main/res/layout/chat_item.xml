@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="horizontal" >
-    <ImageView
+    <com.pkmmte.view.CircularImageView
         android:id="@+id/ivProfileLeft"
         android:contentDescription="@string/profile_other"
         android:layout_width="64dp"
@@ -21,7 +21,7 @@
         android:layout_toRightOf="@+id/ivProfileLeft"
         android:layout_toEndOf="@+id/ivProfileLeft">
     </TextView>
-    <ImageView
+    <com.pkmmte.view.CircularImageView
         android:id="@+id/ivProfileRight"
         android:contentDescription="@string/profile_me"
         android:src="@mipmap/ic_launcher"

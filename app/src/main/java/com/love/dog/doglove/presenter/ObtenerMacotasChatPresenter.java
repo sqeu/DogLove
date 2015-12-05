@@ -1,7 +1,5 @@
 package com.love.dog.doglove.presenter;
 
-import android.util.Log;
-
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -9,37 +7,28 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.google.gson.Gson;
+import com.love.dog.doglove.DTO.MascotaDTO;
 import com.love.dog.doglove.DTO.ResponseDTO;
+import com.love.dog.doglove.DTO.ResponseDTOconPerrosChat;
 import com.love.dog.doglove.DTO.UsuarioDTO;
-import com.love.dog.doglove.view.RegistroView;
-
+import com.love.dog.doglove.view.ObtenerMascotaChatView;
 
 /**
- * Created by Kevin on 18/09/2015.
+ * Created by Hugo on 11/27/2015.
  */
-public class RegistroPresenter implements IRegistroPresenter{
+public class ObtenerMacotasChatPresenter implements IObtenerMacotasChatPresenter {
+    private static final String url = "http://petulima.herokuapp.com/ObtenerMascostasChatServlet";
+    private ObtenerMascotaChatView view;
 
-    //cambiar ip deacuerdo al lugar donde se corra
-    private static final String url = "http://petulima.herokuapp.com/RegistroServlet";
-    private RegistroView view;
-
-    public RegistroPresenter(RegistroView view){
+    public ObtenerMacotasChatPresenter (ObtenerMascotaChatView view){
         this.view=view;
     }
 
-    //Este metodo manda la data al Servlet
-    public void registrar(String correo, String password, String nombre, String apellido,String idFoto,String latitud, String longitud,String idGoogle){
-
-        UsuarioDTO usuario= new UsuarioDTO();
-        usuario.setCorreo(correo);
-        usuario.setPassword(password);
-        usuario.setNombre(nombre);
-        usuario.setApellido(apellido);
-        usuario.setIdFoto(idFoto);
-        usuario.setLatitud(latitud);
-        usuario.setLongitud(longitud);
-        usuario.setIdGoogle(idGoogle);
-        final String json= new Gson().toJson(usuario);
+    @Override
+    public void obtenerMascotasChat(String idMascota) {
+        MascotaDTO mascotaDTO= new MascotaDTO();
+       mascotaDTO.setIdMascota(idMascota);
+        final String json= new Gson().toJson(mascotaDTO);
 
         RequestQueue queue = view.getApplicationController().getRequestQueue();
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
@@ -47,17 +36,17 @@ public class RegistroPresenter implements IRegistroPresenter{
 
                     @Override
                     public void onResponse(String response) {
-                        ResponseDTO responseDTO = new Gson().fromJson(response, ResponseDTO.class);
+                        ResponseDTOconPerrosChat responseDTO = new Gson().fromJson(response, ResponseDTOconPerrosChat.class);
 
                         if (responseDTO.getMsgStatus().equals("OK")){
-                            view.onRegistroCorrecto(responseDTO.getId());
+                            view.onObtenerCorrecto(responseDTO.getPerros(),responseDTO.getChats());
 
                             /*
                         }else if (responseDTO.getMsgStatus().equals("ERROR")){
                             view.onRegistroIncorrecto();
                             */
                         }
-                            else{
+                        else{
                             view.onError(responseDTO.getMsgError());
                         }
                     }
@@ -82,9 +71,11 @@ public class RegistroPresenter implements IRegistroPresenter{
                 DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
                 DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
 
-        stringRequest.setTag("Registro");
+        stringRequest.setTag("ObtnerMascotaChat");
         queue.add(stringRequest);
 
     }
 
-}
+
+    }
+

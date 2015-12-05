@@ -511,4 +511,11 @@ public CardModel getCartaActual(){
         }
     }
 
+    public int getmActivePointerId() {
+        return mActivePointerId;
+    }
+
+    public void setmActivePointerId(int mActivePointerId) {
+        this.mActivePointerId = mActivePointerId;
+    }
 }

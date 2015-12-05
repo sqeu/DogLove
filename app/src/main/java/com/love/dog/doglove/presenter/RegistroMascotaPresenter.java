@@ -1,5 +1,6 @@
 package com.love.dog.doglove.presenter;
 
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -19,7 +20,7 @@ import com.love.dog.doglove.view.RegistroView;
  */
 public class RegistroMascotaPresenter implements IRegistroMascotaPresenter {
     //cambiar ip deacuerdo al lugar donde se corra
-    private static final String url = "http://192.168.1.40:8080/PetLove/RegistroServletMascota";
+    private static final String url = "http://petulima.herokuapp.com/RegistroServletMascota";
     private RegistroMascotaView view ;
 
     public RegistroMascotaPresenter(RegistroMascotaView view){
@@ -74,8 +75,12 @@ public class RegistroMascotaPresenter implements IRegistroMascotaPresenter {
                 return json.getBytes();
             }
         };
-
-        stringRequest.setTag("Registro");
+        stringRequest.setRetryPolicy(new DefaultRetryPolicy(
+                5000    ,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        stringRequest.setTag("RegistroMascota");
         queue.add(stringRequest);
+
     }
 }

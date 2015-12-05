@@ -14,9 +14,11 @@
         android:id="@+id/list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:divider="@color/com_facebook_blue"
+        android:divider="#30ff802d"
         android:dividerHeight="1dp"
-        tools:listitem="@layout/chat_item_lista" >
+        tools:listitem="@layout/chat_item_lista"
+        android:layout_marginBottom="20dp"
+        >
     </ListView>
 
     </FrameLayout>

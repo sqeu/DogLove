@@ -3,24 +3,23 @@ package com.love.dog.doglove.DTO;
 import java.util.List;
 
 /**
- * Created by Hugo on 10/7/2015.
+ * Created by Hugo on 11/27/2015.
  */
-public class ResponseDTOconLlistaMascotas {
-
+public class ResponseDTOconPerrosChat {
     private String msgStatus;
     private String msgError;
     private List<MascotaDTO> perros;
-    private String idPerro;
-    private String idCliente;
+    private List<ChatDTO> chats;
 
-    public ResponseDTOconLlistaMascotas(String msgStatus, String msgError, List<MascotaDTO> perros,String idPerro, String idCliente) {
+    public ResponseDTOconPerrosChat(String msgStatus, String msgError, List<MascotaDTO> perros, List<ChatDTO> chats) {
         this.msgStatus = msgStatus;
         this.msgError = msgError;
         this.perros = perros;
-        this.idPerro=idPerro;
-        this.idCliente=idCliente;
-
+        this.chats = chats;
     }
+
+
+
 
     public String getMsgError() {
         return msgError;
@@ -46,19 +45,13 @@ public class ResponseDTOconLlistaMascotas {
         this.perros = perros;
     }
 
-    public String getIdPerro() {
-        return idPerro;
+
+    public List<ChatDTO> getChats() {
+        return chats;
     }
 
-    public void setIdPerro(String idPerro) {
-        this.idPerro = idPerro;
+    public void setChats(List<ChatDTO> chats) {
+        this.chats = chats;
     }
 
-    public String getIdCliente() {
-        return idCliente;
-    }
-
-    public void setIdCliente(String idCliente) {
-        this.idCliente = idCliente;
-    }
 }

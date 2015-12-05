@@ -1,5 +1,6 @@
 package com.love.dog.doglove.presenter;
 
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -17,7 +18,7 @@ import com.love.dog.doglove.view.ObtenerMensajesView;
  * Created by Hugo on 11/14/2015.
  */
 public class ObtenerMensajesPresenter implements IObtenerMensajesPresenter {
-    private static final String url = "http://192.168.1.40:8080/PetLove/ObtenerMensajesServlet";
+    private static final String url = "http://petulima.herokuapp.com/ObtenerMensajesServlet";
     private ObtenerMensajesView view;
 
     public ObtenerMensajesPresenter (ObtenerMensajesView view){
@@ -69,7 +70,13 @@ public class ObtenerMensajesPresenter implements IObtenerMensajesPresenter {
             }
         };
 
+        stringRequest.setRetryPolicy(new DefaultRetryPolicy(
+                5000    ,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+
         stringRequest.setTag("ObtenerMensajes");
         queue.add(stringRequest);
+
     }
 }

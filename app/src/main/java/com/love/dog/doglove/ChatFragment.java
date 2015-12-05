@@ -2,6 +2,7 @@ package com.love.dog.doglove;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
@@ -27,6 +28,7 @@ import com.love.dog.doglove.view.ObtenerMensajesView;
 import com.parse.ParseException;
 import com.parse.SaveCallback;
 
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Executors;
@@ -50,7 +52,7 @@ public class ChatFragment extends Fragment implements View.OnClickListener, Obte
     private Handler handler = new Handler();
 
     private String idChat;
-    String idMascota;
+    String idMascota,idFoto2;
 
     private final static int INTERVAL = 2000 ; //2 minutes
     Handler mHandler=new Handler();
@@ -95,10 +97,17 @@ public class ChatFragment extends Fragment implements View.OnClickListener, Obte
         super.onViewCreated(view, savedInstanceState);
         Intent intent=getActivity().getIntent();
         idChat=intent.getStringExtra("idchat");
-        System.out.println("idChat"+idChat);
 
-        idMascota=intent.getStringExtra("idmascota1");
-        System.out.println("idDueno"+idMascota);
+        SharedPreferences settings = getActivity().getSharedPreferences("MiFoto", 0);
+        String idFoto1 = settings.getString("idfoto1", null);
+
+        idFoto2=intent.getStringExtra("idfoto2");
+        System.out.println("idChat"+idChat);
+        System.out.println("ChatFragment :" +idFoto1+"::"+idFoto2);
+        idMascota=intent.getStringExtra("idPerro");
+        //System.out.println("idDueno"+idMascota);
+
+        System.out.println("Chat: "+idChat + ":: idPerro: "+idMascota);
 
         etMessage = (EditText) getView().findViewById(R.id.etMessage);
         btSend = (Button) getView().findViewById(R.id.btSend);
@@ -107,9 +116,9 @@ public class ChatFragment extends Fragment implements View.OnClickListener, Obte
         mMessages = new ArrayList<MensajeDTO>();
         lvChat.setTranscriptMode(1);
         mFirstLoad = true;
-        mAdapter = new ChatListAdapter(getActivity(), idMascota, mMessages);
+        mAdapter = new ChatListAdapter(getActivity(), idMascota, mMessages,idFoto1,idFoto2);
         lvChat.setAdapter(mAdapter);
-        // When send button is clicked, create message object on Parse
+
 
 
         // Run the runnable object defined every 100ms
@@ -120,6 +129,9 @@ public class ChatFragment extends Fragment implements View.OnClickListener, Obte
                 refreshMessages();
             }
         }, 0, 5, TimeUnit.SECONDS);
+
+
+
     }
 
     /*private Runnable runnable = new Runnable() {

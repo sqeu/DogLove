@@ -10,23 +10,34 @@
     >
 
 
+    <ImageView
+        android:layout_width="224dp"
+        android:layout_height="136dp"
+        android:id="@+id/imageView"
+        android:background="@drawable/logo"
+        android:contentDescription="DogLove"
+        android:layout_gravity="center_horizontal|bottom"
 
+
+        />
 
     <TableLayout
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="left|center_vertical">
+        android:layout_gravity="center"
+        android:layout_marginBottom="80dp"
+        >
 
 
         <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             >
 
 
             <com.pkmmte.view.CircularImageView
-                android:layout_width="200px"
-                android:layout_height="200px"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
                 android:src="@drawable/prueba"
                 android:id="@+id/circularImagePerfil"
                 app:border="true"
@@ -34,28 +45,41 @@
                 app:border_width="4dp"
                 app:shadow="true"
                 android:layout_column="4"
-                android:layout_gravity="left|center_vertical" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="Nombre"
-                android:id="@+id/textViewNombre"
-                android:layout_column="15"
-                android:layout_gravity="center"
-                android:layout_below="@+id/textViewUbicacion"
+                android:layout_gravity="start|center_vertical"
+                android:layout_marginRight="25dp"
+                android:layout_marginBottom="25dp"
                 />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="Ubicacion"
-                android:id="@+id/textViewUbicacion"
-                android:layout_column="15"
-                android:layout_gravity="center" />
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_gravity="center"
+                >
+
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:text="Nombre"
+                        android:id="@+id/textViewNombrePerfil"
+
+                        />
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="Email"
+                    android:id="@+id/textViewEmailPerfil"
+                    />
+            </LinearLayout>
+
 
         </TableRow>
+
+
 
         <TableRow
             android:layout_width="match_parent"
@@ -63,8 +87,8 @@
             >
 
             <com.pkmmte.view.CircularImageView
-                android:layout_width="200px"
-                android:layout_height="200px"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
                 android:src="@drawable/prueba"
                 android:id="@+id/circularImagePerfilMascota"
                 app:border="true"
@@ -72,37 +96,38 @@
                 app:border_width="4dp"
                 app:shadow="true"
                 android:layout_column="4"
-                android:layout_gravity="left|center_vertical" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="Nombre"
-                android:id="@+id/textViewNombreMascota"
-                android:layout_column="15"
-                android:layout_gravity="center"
-                android:layout_marginBottom="@+id/textViewEdad"
+                android:layout_gravity="start|center_vertical"
+                android:layout_marginRight="25dp"
                 />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="Edad"
-                android:id="@+id/textViewEdad"
-                android:layout_column="15"
-                android:layout_gravity="center" />
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_gravity="center"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="Nombre"
+                    android:id="@+id/textViewNombreMascotaPerfil"
+
+
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="Edad"
+                    android:id="@+id/textViewEdadPerfil"
+
+                    />
+
+            </LinearLayout>
+
         </TableRow>
 
     </TableLayout>
-
-    <ImageView
-        android:layout_width="224dp"
-        android:layout_height="136dp"
-        android:id="@+id/imageView"
-        android:background="@drawable/logo"
-        android:layout_gravity="center_horizontal|bottom" />
 
 
 </FrameLayout>

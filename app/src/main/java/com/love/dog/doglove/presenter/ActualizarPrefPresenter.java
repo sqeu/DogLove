@@ -1,5 +1,6 @@
 package com.love.dog.doglove.presenter;
 
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -15,7 +16,8 @@ import com.love.dog.doglove.view.ActualizarPrefView;
  * Created by Hugo on 11/10/2015.
  */
 public class ActualizarPrefPresenter implements IActualizarPrefPresenter {
-    private static final String url = "http://192.168.1.40:8080/PetLove/ActualizarPrefServlet";
+    private static final String url = "http://petulima.herokuapp.com/ActualizarPrefServlet";
+    //http://192.168.1.40:8080/
     private ActualizarPrefView view ;
 
     public ActualizarPrefPresenter(ActualizarPrefView view){
@@ -68,7 +70,10 @@ public class ActualizarPrefPresenter implements IActualizarPrefPresenter {
                 return json.getBytes();
             }
         };
-
+        stringRequest.setRetryPolicy(new DefaultRetryPolicy(
+                5000    ,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         stringRequest.setTag("ActualizarPref");
         queue.add(stringRequest);
     }

@@ -3,7 +3,9 @@ package com.love.dog.doglove;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -13,6 +15,12 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.love.dog.doglove.DTO.ListaPerrosDTO;
+import com.love.dog.doglove.DTO.MascotaDTO;
+
+import java.util.HashSet;
+import java.util.Set;
+
 
 public class ContenedorActivity extends Activity implements NavigationView.OnNavigationItemSelectedListener{
     NavigationView navigation;
@@ -20,6 +28,7 @@ public class ContenedorActivity extends Activity implements NavigationView.OnNav
     Toolbar toolbar;
     String idDueno;
     String idPerro,idChat;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +56,7 @@ public class ContenedorActivity extends Activity implements NavigationView.OnNav
         idDueno= intent.getStringExtra("id");//funciona
         idPerro=intent.getStringExtra("idPerro");
         idChat=intent.getStringExtra("idchat");
-        System.out.println("contenedor: "+idChat);
+        System.out.println("contenedor: "+idChat + ":: Conteneedor:idPerro: "+idPerro + "IDDUENO:"+idDueno);
         if(idChat!=null){
             Fragment chatFragment = ChatFragment.newInstance();
             ft= getFragmentManager().beginTransaction();
@@ -59,6 +68,7 @@ public class ContenedorActivity extends Activity implements NavigationView.OnNav
         }
         ft.commit();
         navigation.setNavigationItemSelectedListener(this);
+
 
 
     }

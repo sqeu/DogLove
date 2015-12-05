@@ -1,5 +1,6 @@
 package com.love.dog.doglove.presenter;
 
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -15,7 +16,7 @@ import com.love.dog.doglove.view.LoginFBView;
  * Created by Hugo on 11/4/2015.
  */
 public class LoginFBPresenter implements ILoginFBPresenter{
-    private static final String url = "http://192.168.1.40:8080/PetLove/LoginFBServlet";
+    private static final String url = "http://petulima.herokuapp.com/LoginFBServlet";
     private LoginFBView view;
 
     public LoginFBPresenter (LoginFBView view){
@@ -44,7 +45,7 @@ public class LoginFBPresenter implements ILoginFBPresenter{
                         ResponseDTOconLlistaMascotas responseDTO = new Gson().fromJson(response, ResponseDTOconLlistaMascotas.class);
 
                         if (responseDTO.getMsgStatus().equals("OK")){
-                            view.onLoginFBCorrecto(responseDTO.getPerros(),responseDTO.getIdPerro()+"");// este puede ser id del perro o del cleinte
+                            view.onLoginFBCorrecto(responseDTO.getPerros(),responseDTO.getIdPerro()+"",responseDTO.getIdCliente());// este puede ser id del perro o del cleinte
 
                             /*
                         }else if (responseDTO.getMsgStatus().equals("ERROR")){
@@ -71,7 +72,10 @@ public class LoginFBPresenter implements ILoginFBPresenter{
                 return json.getBytes();
             }
         };
-
+        stringRequest.setRetryPolicy(new DefaultRetryPolicy(
+                5000    ,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         stringRequest.setTag("Login");
         queue.add(stringRequest);
     }

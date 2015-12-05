@@ -22,7 +22,7 @@ public class GcmIntentService extends IntentService {
     private static final String TAG = "GcmIntentService";
     private NotificationManager mNotificationManager;
     NotificationCompat.Builder builder;
-    String idDueno1,  idMascota1,  idDuenoPareja,  idMascotaPareja,idChat;
+    String idDueno1,  idMascota1,  idDuenoPareja,  idMascotaPareja,idChat,idFoto1,idFoto2;
 
     public GcmIntentService() {
         super("GcmIntentService");
@@ -52,6 +52,10 @@ public class GcmIntentService extends IntentService {
                 System.out.println(extras.getString("message"));//gettea partes individuales
                 idDueno1 =extras.getString("iddueno1");
                 idMascota1= extras.getString("idmascota1");
+
+                idFoto1=extras.getString("idfoto1");
+                idFoto2=extras.getString("idfoto2");
+
                 idDuenoPareja=extras.getString("iddueno2");
                 idMascotaPareja= extras.getString("idmascota2");
                 idChat=extras.getString("idchat");
@@ -70,8 +74,10 @@ public class GcmIntentService extends IntentService {
         Intent intent = new Intent(this, MatchPatitaActivity.class);
         intent.putExtra("iddueno1", idDueno1);
         intent.putExtra("idmascota1", idMascota1);
+        intent.putExtra("idfoto1",idFoto1);
         intent.putExtra("iddueno2", idDuenoPareja);
         intent.putExtra("idmascota2", idMascotaPareja);
+        intent.putExtra("idfoto2",idFoto2);
         intent.putExtra("idchat",idChat);
         //new Intent(this, MatchPatitaActivity.class)
         PendingIntent contentIntent = PendingIntent.getActivity(

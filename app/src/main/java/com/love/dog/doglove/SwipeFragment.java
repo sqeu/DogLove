@@ -16,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.andtinder.model.CardModel;
+import com.andtinder.model.Orientations;
 import com.andtinder.view.CardContainer;
 import com.andtinder.view.SimpleCardStackAdapter;
 import com.love.dog.doglove.DTO.ListaPerrosDTO;
@@ -40,7 +41,9 @@ import java.util.List;
  */
 public class SwipeFragment extends Fragment implements RegistroMatchView {
     CardContainer mCardContainer;
+    //int posicion = -1;
     int posicion = 0;
+
     private ProgressDialog progressDialog;
     CardModel cardModel;
     private String idDueno;
@@ -68,18 +71,21 @@ public class SwipeFragment extends Fragment implements RegistroMatchView {
         super.onViewCreated(view, savedInstanceState);
         Intent intent=getActivity().getIntent();
         idDueno=intent.getStringExtra("id");
-        System.out.println("swipe fragment"+ idDueno);
+        System.out.println("swipe fragment,idDueno"+ idDueno);
         idPerro=intent.getStringExtra("idPerro");
         System.out.println("swipe fragment, id perro: "+ idPerro);
 
         mCardContainer = (CardContainer) getView().findViewById(R.id.ccPerro);
 
         ListaPerrosDTO listaPerrosDTO = (ListaPerrosDTO) getActivity().getIntent().getSerializableExtra("perros");
+
         List<MascotaDTO> perros = new ArrayList<>(listaPerrosDTO.getPerros());
 
         final SimpleCardStackAdapter adapter = new SimpleCardStackAdapter(getActivity().getApplicationContext());
         //ContextCompat.getDrawable(getView().getContext(), R.drawable.picture1)
         for (final MascotaDTO perro : perros) {
+
+
 //            System.out.println(bmp.getByteCount());
 
 
@@ -118,12 +124,14 @@ public class SwipeFragment extends Fragment implements RegistroMatchView {
                                                     @Override
                                                     public void onLike() {
                                                         Log.i("Swipeable Cards", "I liked the card");
+                                                        //posicion--;
 
                                                     }
 
                                                     @Override
                                                     public void onDislike() {
                                                         Log.i("Swipeable Cards", "I disliked the card");
+                                                        posicion++;
                                                     }
                                                 });
 
@@ -138,7 +146,8 @@ public class SwipeFragment extends Fragment implements RegistroMatchView {
                                                     public void onClick(View v) {
                                                         // TODO Auto-generated method stub
                                                         //System.out.println("titulo probable: " + adapter.pop().getTitle());
-                                                        System.out.println(adapter.getCardModel(posicion).getIdCliente() + "la mascota " + adapter.getCardModel(posicion).getTitle());
+                                                        System.out.println("le di like a la posicion: "+posicion);
+                                                        System.out.println("idmascota:"+adapter.getCardModel(posicion).getIdCliente() + "la mascota " + adapter.getCardModel(posicion).getTitle());
 
                                                         //System.out.println("hay tantos items en adapter " + posicion);
 
@@ -156,6 +165,10 @@ public class SwipeFragment extends Fragment implements RegistroMatchView {
                                                     @Override
                                                     public void onClick(View v) {
                                                         // TODO Auto-generated method stub
+                                                        mCardContainer.quitarVista();
+                                                        posicion++;
+                                                        System.out.println("count"+mCardContainer.getCount());
+
 
                                                     }
                                                 });
@@ -177,12 +190,14 @@ public class SwipeFragment extends Fragment implements RegistroMatchView {
                     });
 
 
-
+            System.out.println(posicion);
 
 
         }
+        System.out.println("count"+mCardContainer.getCount());
+        System.out.println("child count" + mCardContainer.getChildCount());
         // adapter.add(new CardModel("Title1", "Description goes here", ContextCompat.getDrawable(this, R.drawable.picture1)));
-
+        mCardContainer.setOrientation(Orientations.Orientation.Ordered);
 
 
 

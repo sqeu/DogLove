@@ -1,5 +1,6 @@
 package com.love.dog.doglove.presenter;
 
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -16,7 +17,7 @@ import com.love.dog.doglove.view.RegistroView;
  * Created by Hugo on 11/4/2015.
  */
 public class LoginPresenter implements ILoginPresenter {
-    private static final String url = "http://192.168.1.40:8080/PetLove/LoginServlet";
+    private static final String url = "http://petulima.herokuapp.com/LoginServlet";
     private LoginView view;
 
     public LoginPresenter (LoginView view){
@@ -40,7 +41,7 @@ public class LoginPresenter implements ILoginPresenter {
                         ResponseDTOconLlistaMascotas responseDTO = new Gson().fromJson(response, ResponseDTOconLlistaMascotas.class);
 
                         if (responseDTO.getMsgStatus().equals("OK")){
-                            view.onLoginCorrecto(responseDTO.getPerros(),responseDTO.getIdPerro());
+                            view.onLoginCorrecto(responseDTO.getPerros(),responseDTO.getIdPerro(),responseDTO.getIdCliente());
 
                             /*
                         }else if (responseDTO.getMsgStatus().equals("ERROR")){
@@ -68,6 +69,10 @@ public class LoginPresenter implements ILoginPresenter {
             }
         };
 
+        stringRequest.setRetryPolicy(new DefaultRetryPolicy(
+                5000    ,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         stringRequest.setTag("Login");
         queue.add(stringRequest);
 
